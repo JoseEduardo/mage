@@ -25,17 +25,17 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-package org.mage.test.testapi;
+package mage.text.testapi;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestPlayerBase;
+import mage.text.serverside.serverside.base.CardTestPlayerBase;
 
 /**
  * @author noxx
  */
-public class TestAPITest extends CardTestPlayerBase {
+public class TextAPI extends CardTestPlayerBase {
 
     /**
      * Tests that it is possible to cast two instants in a row.

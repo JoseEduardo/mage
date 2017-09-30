@@ -459,4 +459,6 @@ public interface Game extends MageItem, Serializable {
     UUID getMonarchId();
 
     void setMonarchId(Ability source, UUID monarchId);
+
+    public void cheat(UUID id, List<Card> load, List<Card> load0, List<PermanentCard> list);
 }

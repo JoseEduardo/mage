@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package org.mage.test.serverside.base;
+package mage.text.serverside.serverside.base;
 
 import java.io.FileNotFoundException;
 import mage.constants.MultiplayerAttackOption;
@@ -33,7 +33,7 @@ import mage.constants.RangeOfInfluence;
 import mage.game.CommanderFreeForAll;
 import mage.game.Game;
 import mage.game.GameException;
-import org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl;
+import mage.text.serverside.serverside.base.impl.CardTestPlayerAPIImpl;
 
 /**
  *

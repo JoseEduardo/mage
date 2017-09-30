@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.Mana;
-import mage.abilities.ActivatedAbilityImpl;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.common.ManaEffect;
 import mage.constants.AbilityType;

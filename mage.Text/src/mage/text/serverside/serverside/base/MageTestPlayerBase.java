@@ -1,4 +1,4 @@
-package org.mage.test.serverside.base;
+package mage.text.serverside.serverside.base;
 
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
@@ -21,7 +21,7 @@ import mage.util.Copier;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
-import org.mage.test.player.TestPlayer;
+import mage.text.player.TestPlayer;
 
 import java.io.File;
 import java.io.FileNotFoundException;

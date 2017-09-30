@@ -58,6 +58,10 @@ public class PermanentCard extends PermanentImpl {
         init(card, game);
     }
 
+    public PermanentCard(Card card, Game currentGame) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private void init(Card card, Game game) {
         power = card.getPower().copy();
         toughness = card.getToughness().copy();

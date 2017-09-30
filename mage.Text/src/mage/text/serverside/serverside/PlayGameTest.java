@@ -1,4 +1,4 @@
-package org.mage.test.serverside;
+      package mage.text.serverside.serverside;
 
 import mage.cards.Card;
 import mage.cards.Sets;
@@ -15,7 +15,7 @@ import mage.players.Player;
 import mage.players.PlayerType;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mage.test.serverside.base.MageTestBase;
+import mage.text.serverside.serverside.base.MageTestBase;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -27,10 +27,9 @@ import java.util.Random;
  * @author ayratn
  */
 public class PlayGameTest extends MageTestBase {
-
+                 
     private final static List<String> colorChoices = Arrays.asList("bu", "bg", "br", "bw", "ug", "ur", "uw", "gr", "gw", "rw", "bur", "buw", "bug", "brg", "brw", "bgw", "wur", "wug", "wrg", "rgu");
 
-    @Ignore
     @Test
     public void playOneGame() throws GameException, FileNotFoundException, IllegalArgumentException {
         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, 0, 20);

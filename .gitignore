@@ -134,3 +134,6 @@ client_secrets.json
 dependency-reduced-pom.xml
 /Mage.Server.Plugins/Mage.Game.PennyDreadfulCommanderFreeForAll/target/
 /Mage.Tests/nbproject/
+/mage.Text/nbproject/
+*.class
+*#

@@ -1,44 +1,22 @@
-/*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without modification, are
- *  permitted provided that the following conditions are met:
- *
- *     1. Redistributions of source code must retain the above copyright notice, this list of
- *        conditions and the following disclaimer.
- *
- *     2. Redistributions in binary form must reproduce the above copyright notice, this list
- *        of conditions and the following disclaimer in the documentation and/or other materials
- *        provided with the distribution.
- *
- *  THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
- *  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- *  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- *  CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
- *  ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
- *  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- *  The views and conclusions contained in the software and documentation are those of the
- *  authors and should not be interpreted as representing official policies, either expressed
- *  or implied, of BetaSteward_at_googlemail.com.
- */
-package org.mage.test.AI.basic;
+package mage.text.AI.basic;
 
-import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.game.GameException;
+import mage.text.serverside.serverside.base.CardTestPlayerBaseAI;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestPlayerBaseAI;
+
+import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author LevelX2
  */
 public class CostModificationTest extends CardTestPlayerBaseAI {
-
+    
     /**
      * There seems to be a problem when playing Fluctuator against Computer.
      * Once played, I am stuck at "Waiting for Computer" forever...
@@ -46,21 +24,61 @@ public class CostModificationTest extends CardTestPlayerBaseAI {
     @Test
     @Ignore
     // TODO: Check why sometimes Silvercoat Lion is not cast from AI
-    public void testFluctuator() {
-        addCard(Zone.HAND, playerA, "Silvercoat Lion");
-        // Destroy all artifacts, creatures, and enchantments.
-        // Cycling ({3}, Discard this card: Draw a card.)
-        addCard(Zone.HAND, playerA, "Akroma's Vengeance");
+    public void testFluctuator() throws GameException {
+        try {
+            reset();
+        } catch (FileNotFoundException ex) {
 
-        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
-        // Cycling abilities you activate cost you up to {2} less to activate.
-        addCard(Zone.BATTLEFIELD, playerA, "Fluctuator");
+            Logger.getLogger(CostModificationTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        currentGame.setStartingPlayerId(playerA.getId());
+        currentGame.setSimulation(true);
+        
+        
+       
+        String[] graveyard = {
+            "Sunbond",
+            "Swamp",
+            "Chrome Mox"
+        };
+        
+        String[] library = {
+            "Sunbond", 
+            "Swamp",
+            "Chrome Mox"
+        };
 
-        setStopAt(1, PhaseStep.BEGIN_COMBAT);
-        execute();
 
-        assertGraveyardCount(playerA, "Akroma's Vengeance", 1);
-        assertPermanentCount(playerA, "Silvercoat Lion", 1);
+        String[] hand = {
+                "Sunbond",
+                "Swamp",
+                "Chrome Mox"
+        };
+
+        String[] battlefield = {
+                "Sunbond",
+                "Swamp",
+                "Chrome Mox"
+        };
+
+        addCard(Zone.BATTLEFIELD);
+
+        Arrays.stream(hand).forEach(name -> addCard(Zone.HAND, playerA, name));
+        Arrays.stream(library).forEach(name -> addCard(Zone.HAND, playerA, name));
+        Arrays.stream(graveyard).forEach(name -> addCard(Zone.HAND, playerA, name));
+
+        boolean go = true;
+        currentGame.getWinner();
+        while (go) {
+            boolean priorityA;
+            priorityA = playerA.priority(currentGame);
+            Logger.getLogger("SIMILATION").log(Level.FINER, "P: %s", priorityA);
+            
+            boolean priorityB;
+            priorityB = playerB.priority(currentGame);
+            Logger.getLogger("SIMILATION").log(Level.FINER, "P: %s", priorityA);
+            
+            
+        }
     }
-
 }

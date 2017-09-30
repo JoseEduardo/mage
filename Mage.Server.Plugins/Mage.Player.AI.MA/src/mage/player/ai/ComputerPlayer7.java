@@ -223,8 +223,8 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
     protected int addActions(SimulationNode2 node, int depth, int alpha, int beta) {
         boolean stepFinished = false;
         int val;
-        if (logger.isTraceEnabled() && node != null && node.getAbilities() != null && !node.getAbilities().toString().equals("[Pass]")) {
-            logger.trace("Add Action [" + depth + "] " + node.getAbilities().toString() + "  a: " + alpha + " b: " + beta);
+        if (logger.isDebugEnabled() && node != null && node.getAbilities() != null && !node.getAbilities().toString().equals("[Pass]")) {
+            logger.debug("Add Action [" + depth + "] " + node.getAbilities().toString() + "  a: " + alpha + " b: " + beta);
         }
         Game game = node.getGame();
         if (ALLOW_INTERRUPT && Thread.interrupted()) {
@@ -258,7 +258,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
             }
             val = minimaxAB(node, depth - 1, alpha, beta);
         } else {
-            logger.trace("Add Action -- alpha: " + alpha + " beta: " + beta + " depth:" + depth + " step:" + game.getTurn().getStepType() + " for player:" + game.getPlayer(game.getPlayerList().get()).getName());
+            logger.debug("Add Action -- alpha: " + alpha + " beta: " + beta + " depth:" + depth + " step:" + game.getTurn().getStepType() + " for player:" + game.getPlayer(game.getPlayerList().get()).getName());
             if (allPassed(game)) {
                 if (!game.getStack().isEmpty()) {
                     resolve(node, depth, game);

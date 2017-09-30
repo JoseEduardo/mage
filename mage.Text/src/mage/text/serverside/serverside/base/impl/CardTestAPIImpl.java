@@ -1,4 +1,4 @@
-package org.mage.test.serverside.base.impl;
+package mage.text.serverside.serverside.base.impl;
 
 import mage.constants.PhaseStep;
 import mage.abilities.Ability;
@@ -11,9 +11,9 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
 import org.junit.Assert;
-import org.mage.test.player.TestPlayer;
-import org.mage.test.serverside.base.CardTestAPI;
-import org.mage.test.serverside.base.MageTestBase;
+import mage.text.player.TestPlayer;
+import mage.text.serverside.serverside.base.CardTestAPI;
+import mage.text.serverside.serverside.base.MageTestBase;
 
 import java.util.List;
 import java.util.UUID;

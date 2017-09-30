@@ -1,4 +1,4 @@
-package org.mage.test.serverside.base.impl;
+package mage.text.serverside.serverside.base.impl;
 
 import mage.Mana;
 import mage.abilities.Ability;
@@ -24,9 +24,9 @@ import mage.players.ManaPool;
 import mage.players.Player;
 import org.junit.Assert;
 import org.junit.Before;
-import org.mage.test.player.TestPlayer;
-import org.mage.test.serverside.base.CardTestAPI;
-import org.mage.test.serverside.base.MageTestPlayerBase;
+import mage.text.player.TestPlayer;
+import mage.text.serverside.serverside.base.CardTestAPI;
+import mage.text.serverside.serverside.base.MageTestPlayerBase;
 
 import java.io.FileNotFoundException;
 import java.util.List;
@@ -558,6 +558,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
     public void assertPermanentCount(Player player, int count) throws AssertionError {
         int actualCount = 0;
         for (Permanent permanent : currentGame.getBattlefield().getAllPermanents()) {
+
             if (permanent.getControllerId().equals(player.getId())) {
                 actualCount++;
             }

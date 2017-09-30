@@ -1,4 +1,4 @@
-package org.mage.test.serverside.base;
+package mage.text.serverside.serverside.base;
 
 import java.util.List;
 import mage.abilities.Ability;
@@ -6,7 +6,7 @@ import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.players.Player;
-import org.mage.test.player.TestPlayer;
+import mage.text.player.TestPlayer;
 
 /**
  * Interface for all test initialization and assertion operations.

@@ -25,7 +25,7 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
-package org.mage.test.player;
+package mage.text.player;
 
 import java.io.Serializable;
 import java.util.*;
@@ -585,7 +585,7 @@ public class TestPlayer implements Player {
         // Loop through players and validate can attack/block this turn
         UUID defenderId = null;
         //List<PlayerAction>
-        for (Iterator<org.mage.test.player.PlayerAction> it = actions.iterator(); it.hasNext();) {
+        for (Iterator<mage.text.player.PlayerAction> it = actions.iterator(); it.hasNext();) {
             PlayerAction action = it.next();
             if (action.getTurnNum() == game.getTurnNum() && action.getAction().startsWith("attack:")) {
                 String command = action.getAction();

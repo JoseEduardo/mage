@@ -843,13 +843,13 @@ public abstract class GameImpl implements Game, Serializable {
         if (gameOver(null)) {
             return;
         }
-
-        //20091005 - 103.1
-        if (!gameOptions.skipInitShuffling) { //don't shuffle in test mode for card injection on top of player's libraries
-            for (Player player : state.getPlayers().values()) {
-                player.shuffleLibrary(null, this);
-            }
-        }
+//;;
+//        //20091005 - 103.1
+//        if (!gameOptions.skipInitShuffling) { //don't shuffle in test mode for card injection on top of player's libraries
+//            for (Player player : state.getPlayers().values()) {
+//                player.shuffleLibrary(null, this);
+//            }
+//        }
 
         //20091005 - 103.2
         Player choosingPlayer = null;

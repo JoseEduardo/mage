@@ -1,4 +1,4 @@
-package org.mage.test.serverside.base;
+package mage.text.serverside.serverside.base;
 
 import java.io.FileNotFoundException;
 import mage.constants.MultiplayerAttackOption;
@@ -6,7 +6,7 @@ import mage.constants.RangeOfInfluence;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.TwoPlayerDuel;
-import org.mage.test.serverside.base.impl.CardTestPlayerAPIImpl;
+import mage.text.serverside.serverside.base.impl.CardTestPlayerAPIImpl;
 
 /**
  * Base class for testing single cards and effects.

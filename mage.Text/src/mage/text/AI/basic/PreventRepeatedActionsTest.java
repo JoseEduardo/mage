@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package org.mage.test.AI.basic;
+package mage.text.AI.basic;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
@@ -33,7 +33,7 @@ import mage.filter.common.FilterLandPermanent;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestPlayerBaseAI;
+import mage.text.serverside.serverside.base.CardTestPlayerBaseAI;
 
 /**
  *

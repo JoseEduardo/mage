@@ -36,7 +36,6 @@
         <groupId>${project.groupId}</groupId>
         <artifactId>mage-sets</artifactId>
         <version>${mage-version}</version>
-        <type>jar</type>
       </dependency>
       <dependency>
         <groupId>${project.groupId}</groupId>
@@ -49,16 +48,7 @@
         <artifactId>commons-lang3</artifactId>
         <version>3.3.2</version>
       </dependency>
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>mage-common</artifactId>
-        <version>${mage-version}</version>
-      </dependency>
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>mage-sets</artifactId>
-        <version>${mage-version}</version>
-      </dependency>
+
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
@@ -111,16 +101,7 @@
         <artifactId>mage-deck-constructed</artifactId>
         <version>${project.version}</version>
       </dependency>
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>mage-deck-limited</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>mage-game-commanderduel</artifactId>
-        <version>${project.version}</version>
-      </dependency>
+
       <dependency>
         <groupId>${project.groupId}</groupId>
         <artifactId>mage-player-aiminimax</artifactId>
@@ -166,36 +147,11 @@
         <artifactId>mage-game-pennydreadfulcommanderfreeforall</artifactId>
         <version>${project.version}</version>
       </dependency>
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>mage-game-commanderfreeforall</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>mage-game-freeforall</artifactId>
-        <version>${project.version}</version>
-      </dependency>
 
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-      </dependency>
-      <dependency>
-        <groupId>${project.groupId}</groupId>
-        <artifactId>mage-game-twoplayerduel</artifactId>
-        <version>${project.version}</version>
-      </dependency>
       <dependency>
         <groupId>${project.groupId}</groupId>
         <artifactId>mage-player-ai</artifactId>
         <version>${project.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>log4j</groupId>
-        <artifactId>log4j</artifactId>
-        <type>jar</type>
       </dependency>
 
     </dependencies>

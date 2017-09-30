@@ -1,4 +1,4 @@
-package org.mage.test.serverside.performance;
+package org.mage.test.serverside.serverside.performance;
 
 import mage.game.Game;
 import org.junit.Ignore;
@@ -13,7 +13,6 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
 public class CopyGameStatePerformanceTest extends CardTestPlayerBase {
 
     public void run() throws Exception {
-        init();
         reset();
         System.out.println("Started copying...");
         long t1 = System.currentTimeMillis();

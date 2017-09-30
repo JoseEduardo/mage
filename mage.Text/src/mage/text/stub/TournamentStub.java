@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package org.mage.test.stub;
+package mage.text.stub;
 
 import java.util.Collection;
 import java.util.Date;

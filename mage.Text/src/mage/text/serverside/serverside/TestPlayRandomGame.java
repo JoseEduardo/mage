@@ -1,4 +1,4 @@
-package org.mage.test.serverside;
+package mage.text.serverside.serverside;
 
 import mage.cards.Card;
 import mage.cards.Sets;
@@ -14,7 +14,7 @@ import mage.player.ai.ComputerPlayer;
 import mage.players.Player;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mage.test.serverside.base.MageTestBase;
+import mage.text.serverside.serverside.base.MageTestBase;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -28,9 +28,8 @@ import java.util.Random;
 public class TestPlayRandomGame extends MageTestBase {
 
     private final static List<String> colorChoices = Arrays.asList("bu", "bg", "br", "bw", "ug", "ur", "uw", "gr", "gw", "rw", "bur", "buw", "bug", "brg", "brw", "bgw", "wur", "wug", "wrg", "rgu");
-
+ 
     @Test
-    @Ignore
     public void playGames() throws GameException, FileNotFoundException {
         for (int i = 1; i < 100; i++) {
             logger.info("Playing game: " + i);

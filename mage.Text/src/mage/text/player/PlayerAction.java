@@ -26,7 +26,7 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package org.mage.test.player;
+package mage.text.player;
 
 import mage.constants.PhaseStep;
 
