@@ -30,7 +30,7 @@ public class SkulkAbility extends EvasionAbility implements MageSingleton {
         return instance;
     }
 
-    private SkulkAbility() {
+    public SkulkAbility() {
         this.addEffect(new SkulkEffect(Duration.WhileOnBattlefield));
     }
 
