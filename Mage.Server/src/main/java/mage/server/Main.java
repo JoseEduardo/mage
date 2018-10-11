@@ -165,18 +165,23 @@ public final class Main {
         deleteSavedGames();
         ConfigSettings config = ConfigSettings.instance;
         for (GamePlugin plugin : config.getGameTypes()) {
+            logger.info("Loading gameType: " + plugin.getName());
             GameFactory.instance.addGameType(plugin.getName(), loadGameType(plugin), loadPlugin(plugin));
         }
         for (GamePlugin plugin : config.getTournamentTypes()) {
+            logger.info("Loading addTournamentType: " + plugin.getName());
             TournamentFactory.instance.addTournamentType(plugin.getName(), loadTournamentType(plugin), loadPlugin(plugin));
         }
         for (Plugin plugin : config.getPlayerTypes()) {
+            logger.info("Loading addPlayerType: " + plugin.getName());
             PlayerFactory.instance.addPlayerType(plugin.getName(), loadPlugin(plugin));
         }
         for (Plugin plugin : config.getDraftCubes()) {
+            logger.info("Loading addDraftCube: " + plugin.getName());
             CubeFactory.instance.addDraftCube(plugin.getName(), loadPlugin(plugin));
         }
         for (Plugin plugin : config.getDeckTypes()) {
+            logger.info("Loading addDeckType: " + plugin.getName());
             DeckValidatorFactory.instance.addDeckType(plugin.getName(), loadPlugin(plugin));
         }
 

@@ -27,18 +27,12 @@
  */
 package mage.server;
 
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import mage.MageException;
 import mage.constants.Constants;
 import mage.interfaces.callback.ClientCallback;
 import mage.interfaces.callback.ClientCallbackMethod;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
-import static mage.server.DisconnectReason.LostConnection;
 import mage.server.game.GamesRoom;
 import mage.server.game.GamesRoomManager;
 import mage.server.util.ConfigSettings;
@@ -49,6 +43,14 @@ import org.jboss.remoting.callback.AsynchInvokerCallbackHandler;
 import org.jboss.remoting.callback.Callback;
 import org.jboss.remoting.callback.HandleCallbackException;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
+
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static mage.server.DisconnectReason.LostConnection;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -70,6 +72,15 @@ public class Session {
 
     private final ReentrantLock lock;
     private final ReentrantLock callBackLock;
+
+    public Session(String sessionId) {
+        this.sessionId = sessionId;
+        this.callbackHandler = null;
+        this.isAdmin = false;
+        this.timeConnected = new Date();
+        this.lock = new ReentrantLock();
+        this.callBackLock = new ReentrantLock();
+    }
 
     public Session(String sessionId, InvokerCallbackHandler callbackHandler) {
         this.sessionId = sessionId;
@@ -222,7 +233,7 @@ public class Session {
                     return "Your profile is deactivated until " + SystemUtil.dateFormat.format(authorizedUser.lockedUntil);
                 } else {
                     UserManager.instance.createUser(userName, host, authorizedUser).ifPresent(user
-                            -> user.setLockedUntil(null)
+                        -> user.setLockedUntil(null)
                     );
 
                 }
@@ -273,7 +284,7 @@ public class Session {
     public void connectAdmin() {
         this.isAdmin = true;
         User user = UserManager.instance.createUser("Admin", host, null).orElse(
-                UserManager.instance.getUserByName("Admin").get());
+            UserManager.instance.getUserByName("Admin").get());
         UserData adminUserData = UserData.getDefaultUserDataView();
         adminUserData.setGroupId(UserGroup.ADMIN.getGroupId());
         user.setUserData(adminUserData);
@@ -298,7 +309,7 @@ public class Session {
                 user.getUserData().update(userData);
             }
             if (user.getUserData().getAvatarId() < Constants.MIN_AVATAR_ID
-                    || user.getUserData().getAvatarId() > Constants.MAX_AVATAR_ID) {
+                || user.getUserData().getAvatarId() > Constants.MAX_AVATAR_ID) {
                 user.getUserData().setAvatarId(Constants.DEFAULT_AVATAR_ID);
             }
             if (user.getUserData().getAvatarId() == 11) {

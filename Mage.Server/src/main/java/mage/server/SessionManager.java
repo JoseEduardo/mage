@@ -66,6 +66,12 @@ public enum SessionManager {
         sessions.put(sessionId, session);
     }
 
+    public Session createSession(String sessionId) {
+        Session session = new Session(sessionId);
+        sessions.put(sessionId, session);
+        return session;
+    }
+
     public boolean registerUser(String sessionId, String userName, String password, String email) throws MageException {
         Session session = sessions.get(sessionId);
         if (session == null) {

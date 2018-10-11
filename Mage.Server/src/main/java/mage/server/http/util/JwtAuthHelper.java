@@ -1,6 +1,6 @@
 package mage.server.http.util;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -21,15 +21,21 @@ public class JwtAuthHelper {
 
     public static String mintJwt(String username) {
         return Jwts.builder()
-                .signWith(SignatureAlgorithm.HS256, encodeKey("UTF-8"))
-                .setSubject(username)
-                .compact();
+            .signWith(SignatureAlgorithm.HS256, encodeKey("UTF-8"))
+            .setSubject(username)
+            .compact();
     }
 
     public static Optional<User> deriveUserFromJwt(String rawJwt) {
         Optional<Jws<Claims>> claims = extractJwtPayload(rawJwt);
 
         return UserManager.instance.getUserByName(claims.get().getBody().getSubject());
+    }
+
+    public static String getUserName(String rawJwt) {
+        Optional<Jws<Claims>> claims = extractJwtPayload(rawJwt);
+
+        return claims.get().getBody().getSubject();
     }
 
     public static Optional<Jws<Claims>> extractJwtPayload(String rawJwt) {
@@ -39,8 +45,8 @@ public class JwtAuthHelper {
         if (m.matches()) {
             rawJwt = m.group(1);
             result = Jwts.parser()
-                      .setSigningKey(encodeKey("UTF-8"))
-                      .parseClaimsJws(rawJwt);
+                .setSigningKey(encodeKey("UTF-8"))
+                .parseClaimsJws(rawJwt);
         }
 
         return Optional.ofNullable(result);
@@ -51,7 +57,7 @@ public class JwtAuthHelper {
 
         try {
             key = JWT_SECRET_KEY.getBytes(rawKey);
-        } catch(UnsupportedEncodingException ex) {
+        } catch (UnsupportedEncodingException ex) {
 
         }
 
