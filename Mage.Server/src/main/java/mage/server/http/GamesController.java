@@ -4,6 +4,7 @@ import com.google.gson.GsonBuilder;
 import mage.constants.ManaType;
 import mage.constants.PlayerAction;
 import mage.server.User;
+import mage.server.game.GameController;
 import mage.server.game.GameManager;
 import mage.server.http.util.JwtAuthHelper;
 import mage.view.GameView;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
 @RequestMapping(value = "/games")
@@ -46,7 +48,7 @@ public class GamesController {
 
     @RequestMapping(value = "quit_match/{gameId}", method = RequestMethod.POST)
     public void quitMatch(@PathVariable String gameId,
-                         @RequestHeader(value = "Authorization") String jwt) {
+                          @RequestHeader(value = "Authorization") String jwt) {
         Optional<User> user = JwtAuthHelper.deriveUserFromJwt(jwt);
 
         GameManager.instance.quitMatch(UUID.fromString(gameId), user.get().getId());
@@ -62,7 +64,7 @@ public class GamesController {
 
     @RequestMapping(value = "stop_watching/{gameId}", method = RequestMethod.POST)
     public void stopWatching(@PathVariable String gameId,
-                          @RequestHeader(value = "Authorization") String jwt) {
+                             @RequestHeader(value = "Authorization") String jwt) {
         Optional<User> user = JwtAuthHelper.deriveUserFromJwt(jwt);
 
         GameManager.instance.stopWatching(UUID.fromString(gameId), user.get().getId());
@@ -185,6 +187,20 @@ public class GamesController {
         return GameManager.instance.getChatId(
             UUID.fromString(gameId)
         );
+    }
+
+    @RequestMapping(value = "/count", method = RequestMethod.GET)
+    public int count(@RequestHeader(value = "Authorization") String jwt) {
+
+        Optional<User> user = JwtAuthHelper.deriveUserFromJwt(jwt);
+
+        return GameManager.instance.getNumberActiveGames();
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ConcurrentHashMap<UUID, GameController> getAllGames(@RequestHeader(value = "Authorization") String jwt) {
+        Optional<User> user = JwtAuthHelper.deriveUserFromJwt(jwt);
+        return GameManager.instance.getGames();
     }
 
 }

@@ -1,16 +1,17 @@
 package mage.server.http;
 
+import mage.MageException;
 import mage.game.Table;
 import mage.game.match.MatchOptions;
 import mage.server.TableManager;
-import mage.server.game.GamesRoomManager;
+import mage.server.User;
+import mage.server.game.GamesRoomImpl;
+import mage.server.http.util.JwtAuthHelper;
+import mage.server.tables.PlayerTable;
 import mage.view.TableView;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/tables")
@@ -43,7 +44,21 @@ public class TablesController {
     @RequestMapping(value = "/createTable", method = RequestMethod.POST)
     public TableView createTable(@RequestBody MatchOptions options,
                                  @RequestHeader(value = "Authorization") String jwt) {
-        return new TableView(TableManager.instance.createTable(GamesRoomManager.instance.getMainRoomId(), options));
+
+        GamesRoomImpl gamesRoom = new GamesRoomImpl();
+        Optional<User> user = JwtAuthHelper.deriveUserFromJwt(jwt);
+        return gamesRoom.createTable(user.get().getId(), options);
+        //return new TableView(TableManager.instance.createTable(GamesRoomManager.instance.getMainRoomId(), options));
+    }
+
+    @RequestMapping(value = "/join_table/{idTable}", method = RequestMethod.POST)
+    public boolean joinTable(@RequestBody PlayerTable options,
+                             @PathVariable String idTable,
+                             @RequestHeader(value = "Authorization") String jwt) throws MageException {
+
+        Optional<User> user = JwtAuthHelper.deriveUserFromJwt(jwt);
+        return TableManager.instance.joinTable(user.get().getId(), UUID.fromString(idTable), options.getName()
+            , options.getPlayerType(), options.getSkill(), options.getDeckList(), options.getPassword());
     }
 
 }

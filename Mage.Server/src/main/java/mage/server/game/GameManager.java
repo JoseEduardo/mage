@@ -192,6 +192,10 @@ public enum GameManager {
         return gameControllers.size();
     }
 
+    public ConcurrentHashMap<UUID, GameController> getGames() {
+        return gameControllers;
+    }
+
     public Map<UUID, GameController> getGameController() {
         Map<UUID, GameController> newControllers = new HashMap<>();
         final Lock r = gameControllersLock.readLock();
