@@ -61,4 +61,12 @@ public class TablesController {
             , options.getPlayerType(), options.getSkill(), options.getDeckList(), options.getPassword());
     }
 
+    @RequestMapping(value = "/start_match/{idTable}", method = RequestMethod.POST)
+    public void startMatch(@PathVariable String idTable,
+                              @RequestHeader(value = "Authorization") String jwt) {
+
+        Optional<User> user = JwtAuthHelper.deriveUserFromJwt(jwt);
+        TableManager.instance.startMatch(user.get().getId(), UUID.fromString(""), UUID.fromString(idTable));
+    }
+
 }
