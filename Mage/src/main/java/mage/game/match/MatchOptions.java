@@ -80,6 +80,32 @@ public class MatchOptions implements Serializable {
         this.numSeats = 2;
     }*/
 
+    public MatchOptions() {
+    }
+
+    public MatchOptions(String name, MultiplayerAttackOption attackOption, RangeOfInfluence range, int winsNeeded, int freeMulligans, String gameType, String deckType, boolean limited, List<PlayerType> playerTypes, boolean multiPlayer, int numSeats, String password, SkillLevel skillLevel, boolean rollbackTurnsAllowed, int quitRatio, int edhPowerLevel, boolean rated, int numSeatsForMatch, Set<String> bannedUsers, MatchTimeLimit matchTimeLimit) {
+        this.name = name;
+        this.attackOption = attackOption;
+        this.range = range;
+        this.winsNeeded = winsNeeded;
+        this.freeMulligans = freeMulligans;
+        this.gameType = gameType;
+        this.deckType = deckType;
+        this.limited = limited;
+        this.playerTypes = playerTypes;
+        this.multiPlayer = multiPlayer;
+        this.numSeats = numSeats;
+        this.password = password;
+        this.skillLevel = skillLevel;
+        this.rollbackTurnsAllowed = rollbackTurnsAllowed;
+        this.quitRatio = quitRatio;
+        this.edhPowerLevel = edhPowerLevel;
+        this.rated = rated;
+        this.numSeatsForMatch = numSeatsForMatch;
+        this.bannedUsers = bannedUsers;
+        this.matchTimeLimit = matchTimeLimit;
+    }
+
     public MatchOptions(String name, String gameType, boolean multiPlayer, int numSeats ) {
         this.name = name;
         this.gameType = gameType;

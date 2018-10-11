@@ -1,7 +1,9 @@
 package mage.server.http;
 
 import mage.game.Table;
+import mage.game.match.MatchOptions;
 import mage.server.TableManager;
+import mage.server.game.GamesRoomManager;
 import mage.view.TableView;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,14 +13,14 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(value="/tables")
+@RequestMapping(value = "/tables")
 public class TablesController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public Collection<TableView> index(@RequestHeader(value="Authorization") String jwt) {
+    public Collection<TableView> index(@RequestHeader(value = "Authorization") String jwt) {
         List<TableView> list = new ArrayList<TableView>();
 
-        for(Table tbl: TableManager.instance.getTables()) {
+        for (Table tbl : TableManager.instance.getTables()) {
             list.add(new TableView(tbl));
         }
 
@@ -27,13 +29,21 @@ public class TablesController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public TableView show(@PathVariable String id,
-                          @RequestHeader(value="Authorization") String jwt) {
+                          @RequestHeader(value = "Authorization") String jwt) {
         return new TableView(TableManager.instance.getTable(UUID.fromString(id)));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public TableView delete(@PathVariable String id,
-                            @RequestHeader(value="Authorization") String jwt) {
+                            @RequestHeader(value = "Authorization") String jwt) {
         return new TableView(TableManager.instance.getTable(UUID.fromString(id)));
     }
+
+
+    @RequestMapping(value = "/createTable", method = RequestMethod.POST)
+    public TableView createTable(@RequestBody MatchOptions options,
+                                 @RequestHeader(value = "Authorization") String jwt) {
+        return new TableView(TableManager.instance.createTable(GamesRoomManager.instance.getMainRoomId(), options));
+    }
+
 }
