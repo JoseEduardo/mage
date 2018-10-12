@@ -45,4 +45,21 @@ public class SessionController {
         return session.getCallbackForPulling();
     }
 
+    @RequestMapping(value = "clear_callback/{sessionId}", method = RequestMethod.GET)
+    public void clearCallback(@PathVariable String sessionId,
+                                      @RequestHeader(value = "Authorization") String jwt) throws MageException {
+        Optional<User> user = JwtAuthHelper.deriveUserFromJwt(jwt);
+
+        Optional<Session> optSession = SessionManager.instance.getSession(sessionId);
+        if (!optSession.isPresent()) {
+            throw new IllegalArgumentException("SessionId not found.");
+        }
+        Session session = optSession.get();
+        if (!session.getUserId().equals(user.get().getId())) {
+            throw new IllegalArgumentException("Illegal User for SessionId not found.");
+        }
+
+        session.setCallbackForPulling(new ClientCallback());
+    }
+
 }

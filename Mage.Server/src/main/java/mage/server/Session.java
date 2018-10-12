@@ -466,6 +466,10 @@ public class Session {
     public ClientCallback getCallbackForPulling() {
         return callbackForPulling;
     }
+
+    public void setCallbackForPulling(ClientCallback callbackForPulling) {
+        this.callbackForPulling = callbackForPulling;
+    }
 }
 
 class RandomString {
