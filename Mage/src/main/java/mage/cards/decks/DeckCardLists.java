@@ -46,6 +46,18 @@ public class DeckCardLists implements Serializable {
     private DeckCardLayout cardLayout = null;
     private DeckCardLayout sideboardLayout = null;
 
+    public DeckCardLists() {
+    }
+
+    public DeckCardLists(String name, String author, List<DeckCardInfo> cards, List<DeckCardInfo> sideboard, DeckCardLayout cardLayout, DeckCardLayout sideboardLayout) {
+        this.name = name;
+        this.author = author;
+        this.cards = cards;
+        this.sideboard = sideboard;
+        this.cardLayout = cardLayout;
+        this.sideboardLayout = sideboardLayout;
+    }
+
     /**
      * @return The layout of the cards
      */

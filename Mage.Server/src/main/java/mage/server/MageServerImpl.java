@@ -31,6 +31,8 @@ import java.security.SecureRandom;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import javax.management.timer.Timer;
+
+import com.google.gson.Gson;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
@@ -284,6 +286,7 @@ public class MageServerImpl implements MageServer {
 
     @Override
     public boolean joinTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final PlayerType playerType, final int skill, final DeckCardLists deckList, final String password) throws MageException, GameException {
+        //logger.info(new Gson().toJson(deckList));
         return executeWithResult("joinTable", sessionId, new ActionWithBooleanResult() {
             @Override
             public Boolean execute() throws MageException {

@@ -41,7 +41,7 @@ public class TablesController {
     }
 
 
-    @RequestMapping(value = "/createTable", method = RequestMethod.POST)
+    @RequestMapping(value = "/create_table", method = RequestMethod.POST)
     public TableView createTable(@RequestBody MatchOptions options,
                                  @RequestHeader(value = "Authorization") String jwt) {
 

@@ -27,6 +27,7 @@
  */
 package mage.server;
 
+import com.google.gson.Gson;
 import mage.MageException;
 import mage.constants.Constants;
 import mage.interfaces.callback.ClientCallback;
@@ -69,6 +70,7 @@ public class Session {
     private boolean isAdmin = false;
     private final AsynchInvokerCallbackHandler callbackHandler;
     private boolean valid = true;
+    private boolean restClient = false;
 
     private final ReentrantLock lock;
     private final ReentrantLock callBackLock;
@@ -80,6 +82,7 @@ public class Session {
         this.timeConnected = new Date();
         this.lock = new ReentrantLock();
         this.callBackLock = new ReentrantLock();
+        this.restClient = true;
     }
 
     public Session(String sessionId, InvokerCallbackHandler callbackHandler) {
@@ -233,7 +236,7 @@ public class Session {
                     return "Your profile is deactivated until " + SystemUtil.dateFormat.format(authorizedUser.lockedUntil);
                 } else {
                     UserManager.instance.createUser(userName, host, authorizedUser).ifPresent(user
-                        -> user.setLockedUntil(null)
+                            -> user.setLockedUntil(null)
                     );
 
                 }
@@ -284,7 +287,7 @@ public class Session {
     public void connectAdmin() {
         this.isAdmin = true;
         User user = UserManager.instance.createUser("Admin", host, null).orElse(
-            UserManager.instance.getUserByName("Admin").get());
+                UserManager.instance.getUserByName("Admin").get());
         UserData adminUserData = UserData.getDefaultUserDataView();
         adminUserData.setGroupId(UserGroup.ADMIN.getGroupId());
         user.setUserData(adminUserData);
@@ -309,7 +312,7 @@ public class Session {
                 user.getUserData().update(userData);
             }
             if (user.getUserData().getAvatarId() < Constants.MIN_AVATAR_ID
-                || user.getUserData().getAvatarId() > Constants.MAX_AVATAR_ID) {
+                    || user.getUserData().getAvatarId() > Constants.MAX_AVATAR_ID) {
                 user.getUserData().setAvatarId(Constants.DEFAULT_AVATAR_ID);
             }
             if (user.getUserData().getAvatarId() == 11) {
@@ -385,6 +388,10 @@ public class Session {
 
     public void fireCallback(final ClientCallback call) {
         boolean lockSet = false;
+        if (restClient) {
+            logger.info("CALLBACK: " + sessionId + " messageId: " + new Gson().toJson(call));
+            return;
+        }
         try {
             if (valid && callBackLock.tryLock(50, TimeUnit.MILLISECONDS)) {
                 call.setMessageId(messageId++);

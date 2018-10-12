@@ -41,6 +41,9 @@ public class DeckCardInfo implements Serializable {
     private String cardNum;
     private int quantity;
 
+    public DeckCardInfo() {
+    }
+
     public DeckCardInfo(String cardName, String cardNum, String setCode) {
         this(cardName, cardNum, setCode, 1);
     }
