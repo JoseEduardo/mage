@@ -1,10 +1,14 @@
 package mage.server.http;
 
 import mage.MageException;
+import mage.interfaces.callback.ClientCallback;
 import mage.server.Session;
 import mage.server.SessionManager;
+import mage.server.User;
 import mage.server.http.util.JwtAuthHelper;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/session")
@@ -22,6 +26,23 @@ public class SessionController {
                                @RequestHeader(value = "Authorization") String jwt) throws MageException {
         String userName = JwtAuthHelper.getUserName(jwt);
         return SessionManager.instance.connectUser(sessionId, userName, password, "");
+    }
+
+    @RequestMapping(value = "get_callback/{sessionId}", method = RequestMethod.GET)
+    public ClientCallback getCallback(@PathVariable String sessionId,
+                                      @RequestHeader(value = "Authorization") String jwt) throws MageException {
+        Optional<User> user = JwtAuthHelper.deriveUserFromJwt(jwt);
+
+        Optional<Session> optSession = SessionManager.instance.getSession(sessionId);
+        if (!optSession.isPresent()) {
+            throw new IllegalArgumentException("SessionId not found.");
+        }
+        Session session = optSession.get();
+        if (!session.getUserId().equals(user.get().getId())) {
+            throw new IllegalArgumentException("Illegal User for SessionId not found.");
+        }
+
+        return session.getCallbackForPulling();
     }
 
 }

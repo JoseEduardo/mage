@@ -71,6 +71,7 @@ public class Session {
     private final AsynchInvokerCallbackHandler callbackHandler;
     private boolean valid = true;
     private boolean restClient = false;
+    private ClientCallback callbackForPulling;
 
     private final ReentrantLock lock;
     private final ReentrantLock callBackLock;
@@ -83,6 +84,7 @@ public class Session {
         this.lock = new ReentrantLock();
         this.callBackLock = new ReentrantLock();
         this.restClient = true;
+        this.callbackForPulling = new ClientCallback();
     }
 
     public Session(String sessionId, InvokerCallbackHandler callbackHandler) {
@@ -389,6 +391,7 @@ public class Session {
     public void fireCallback(final ClientCallback call) {
         boolean lockSet = false;
         if (restClient) {
+            this.callbackForPulling = call;
             logger.info("CALLBACK: " + sessionId + " messageId: " + new Gson().toJson(call));
             return;
         }
@@ -459,6 +462,10 @@ public class Session {
         }
         return t;
     }
+
+    public ClientCallback getCallbackForPulling() {
+        return callbackForPulling;
+    }
 }
 
 class RandomString {
@@ -491,4 +498,6 @@ class RandomString {
         }
         return new String(buf);
     }
+
+
 }
