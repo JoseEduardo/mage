@@ -9,6 +9,7 @@ import mage.server.game.GamesRoomImpl;
 import mage.server.http.util.JwtAuthHelper;
 import mage.server.tables.PlayerTable;
 import mage.view.TableView;
+import mage.view.TableViewList;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -18,14 +19,17 @@ import java.util.*;
 public class TablesController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public Collection<TableView> index(@RequestHeader(value = "Authorization") String jwt) {
+    public TableViewList index(@RequestHeader(value = "Authorization") String jwt) {
         List<TableView> list = new ArrayList<TableView>();
 
         for (Table tbl : TableManager.instance.getTables()) {
             list.add(new TableView(tbl));
         }
 
-        return list;
+        TableViewList tableViewList = new TableViewList();
+        tableViewList.setTables(list);
+
+        return tableViewList;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
