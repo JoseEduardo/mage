@@ -45,7 +45,7 @@ public class SessionController {
         return session.getCallbackForPulling();
     }
 
-    @RequestMapping(value = "clear_callback/{sessionId}", method = RequestMethod.GET)
+    @RequestMapping(value = "clear_callback/{sessionId}", method = RequestMethod.POST)
     public void clearCallback(@PathVariable String sessionId,
                                       @RequestHeader(value = "Authorization") String jwt) throws MageException {
         Optional<User> user = JwtAuthHelper.deriveUserFromJwt(jwt);
