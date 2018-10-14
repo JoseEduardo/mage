@@ -20,8 +20,7 @@ public class TableController : MonoBehaviour {
 
 	private void getTables(){
 		currentRequest = new RequestHelper {
-			Uri = basePath + "/tables/",
-			Body = new Post {}
+			Uri = basePath + "/tables/"
 		};
 
 		RestClient.Get(currentRequest).Then(response => {
@@ -422,7 +421,7 @@ public class TableController : MonoBehaviour {
 			Body = demoDeck()
 		};
 		RestClient.Post(currentRequest)
-		.Catch(err => EditorUtility.DisplayDialog ("Error", err.Message, "Ok"));
+		.Catch(err => Debug.Log("ERROR"));
 	}
 
 

@@ -12,22 +12,20 @@ public class LoginController : MonoBehaviour {
 
 	private void createSession(){
 		currentRequest = new RequestHelper {
-			Uri = basePath + "/session/create_session/" + PlayerStats.sessionId,
-			Body = new Post {}
+			Uri = basePath + "/session/create_session/" + PlayerStats.sessionId
 		};
-		RestClient.Post<Post>(currentRequest)
+		RestClient.Post(currentRequest)
 		.Then(res => connectUser())
-		.Catch(err => EditorUtility.DisplayDialog ("Error", err.Message, "Ok"));
+		.Catch(err => Debug.Log("ERROR"));
 	}
 
 	private void connectUser(){
 		currentRequest = new RequestHelper {
-			Uri = basePath + "/session/connect_user/" + PlayerStats.sessionId + "/password",
-			Body = new Post {}
+			Uri = basePath + "/session/connect_user/" + PlayerStats.sessionId + "/password"
 		};
-		RestClient.Post<Post>(currentRequest)
+		RestClient.Post(currentRequest)
 		.Then(res => SceneManager.LoadScene("scnTables"))
-		.Catch(err => EditorUtility.DisplayDialog ("Error", err.Message, "Ok"));
+		.Catch(err => Debug.Log("ERROR"));
 	}
 
 	public void doLogin() {

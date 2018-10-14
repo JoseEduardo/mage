@@ -13,8 +13,7 @@ public class GameController : MonoBehaviour {
 
 	private void joinGame(){
 		currentRequest = new RequestHelper {
-			Uri = basePath + "/games/join_game/" + PlayerStats.gameId,
-			Body = new Post {}
+			Uri = basePath + "/games/join_game/" + PlayerStats.gameId
 		};
 
 		RestClient.Post(currentRequest);

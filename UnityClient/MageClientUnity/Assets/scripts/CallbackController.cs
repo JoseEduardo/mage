@@ -13,8 +13,7 @@ public class CallbackController : MonoBehaviour {
 
 	private void getCallback(){
 		currentRequest = new RequestHelper {
-			Uri = basePath + "/session/get_callback/" + PlayerStats.sessionId,
-			Body = new Post {}
+			Uri = basePath + "/session/get_callback/" + PlayerStats.sessionId
 		};
 
 		RestClient.Get(currentRequest)
@@ -27,8 +26,7 @@ public class CallbackController : MonoBehaviour {
 	
 	private void markReadCallback(){
 		currentRequest = new RequestHelper {
-			Uri = basePath + "/session/clear_callback/" + PlayerStats.sessionId,
-			Body = new Post {}
+			Uri = basePath + "/session/clear_callback/" + PlayerStats.sessionId
 		};
 
 		RestClient.Post(currentRequest);
@@ -41,20 +39,29 @@ public class CallbackController : MonoBehaviour {
 	void executeCallback(ClientCallback callback) {
 		Debug.Log(callback.method);
 		switch (callback.method) {
+            case "JOINED_TABLE": {
+                TableClientMessage message =  JsonUtility.FromJson<TableClientMessage>(callback.data);
+                //joinedTable(message.getRoomId(), message.getTableId(), message.getFlag());
+                markReadCallback();
+                break;
+            }
             case "START_GAME": {
                 TableClientMessage message =  JsonUtility.FromJson<TableClientMessage>(callback.data);
+                PlayerStats.gameId = message.gameId;
                 markReadCallback();
 				SceneManager.LoadScene("scnGame");
                 break;
             }
-            case "JOINED_TABLE": {
-                TableClientMessage message =  JsonUtility.FromJson<TableClientMessage>(callback.data);
-           		Debug.Log(callback);
+            case "GAME_INIT": {
+                GameView message =  JsonUtility.FromJson<GameView>(callback.data);
            		Debug.Log(message);
-                //joinedTable(message.getRoomId(), message.getTableId(), message.getFlag());
-                //PlayerStats.gameId = message.gameId;
-           		Debug.Log(message.gameId);
-                markReadCallback();
+				markReadCallback();
+                break;
+            }
+            case "GAME_INFORM": {
+                //GameView message =  JsonUtility.FromJson<GameView>(callback.data);
+           		//Debug.Log(message);
+				markReadCallback();
                 break;
             }
         }

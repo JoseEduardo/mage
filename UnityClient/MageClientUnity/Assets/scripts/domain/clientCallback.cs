@@ -45,22 +45,4 @@ namespace Models
 		}	
 	}
 
-
-	[Serializable]
-	public class SimpleCardView
-	{
-	    public string id;
-	    public string expansionSetCode;
-	    public string tokenSetCode;
-	    public string tokenDescriptor;
-	    public string cardNumber;
-	    public bool usesVariousArt;
-	    public bool gameObject;
-
-		public override string ToString(){
-			return UnityEngine.JsonUtility.ToJson (this, true);
-		}
-	}
-
-
 }
