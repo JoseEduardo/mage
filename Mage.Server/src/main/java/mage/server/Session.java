@@ -391,6 +391,8 @@ public class Session {
     public void fireCallback(final ClientCallback call) {
         boolean lockSet = false;
         if (restClient) {
+            Object currData = call.getData();
+            call.setData(new Gson().toJson(currData));
             this.callbackForPulling = call;
             logger.info("CALLBACK: " + sessionId + " messageId: " + new Gson().toJson(call));
             return;
