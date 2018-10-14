@@ -394,7 +394,7 @@ public class Session {
             Object currData = call.getData();
             call.setData(new Gson().toJson(currData));
             this.callbackForPulling = call;
-            logger.info("CALLBACK: " + sessionId + " messageId: " + new Gson().toJson(call));
+            logger.info("CALLBACK: " + sessionId + " METHOD: " + call.getMethod() + " messageId: " + new Gson().toJson(call));
             return;
         }
         try {
