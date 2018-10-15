@@ -55,15 +55,25 @@ public class CallbackController : MonoBehaviour {
             case "GAME_INIT": {
                 GameView message =  JsonUtility.FromJson<GameView>(callback.data);
            		Debug.Log(message);
+          		Debug.Log(callback.data);
 				markReadCallback();
                 break;
             }
             case "GAME_INFORM": {
-                //GameView message =  JsonUtility.FromJson<GameView>(callback.data);
-           		//Debug.Log(message);
+                GameView message =  JsonUtility.FromJson<GameView>(callback.data);
+           		Debug.Log(message);
+          		Debug.Log(callback.data);
 				markReadCallback();
                 break;
             }
+            case "GAME_TARGET": {
+                GameClientMessage message =  JsonUtility.FromJson<GameClientMessage>(callback.data);
+           		Debug.Log(message);
+          		Debug.Log(callback.data);
+				markReadCallback();
+                break;
+            }
+            
         }
 	}
 }
