@@ -54,6 +54,12 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\scripts\CallbackController.cs" />
+     <Compile Include="Assets\scripts\controller\CardController.cs" />
+     <Compile Include="Assets\scripts\controller\GameController.cs" />
+     <Compile Include="Assets\scripts\controller\LoginController.cs" />
+     <Compile Include="Assets\scripts\controller\PlayerConectionController.cs" />
+     <Compile Include="Assets\scripts\controller\PlayerController.cs" />
+     <Compile Include="Assets\scripts\controller\TableController.cs" />
      <Compile Include="Assets\scripts\domain\card.cs" />
      <Compile Include="Assets\scripts\domain\clientCallback.cs" />
      <Compile Include="Assets\scripts\domain\gameClientMessage.cs" />
@@ -61,14 +67,13 @@
      <Compile Include="Assets\scripts\domain\playerView.cs" />
      <Compile Include="Assets\scripts\domain\tableCardList.cs" />
      <Compile Include="Assets\scripts\domain\tables.cs" />
-     <Compile Include="Assets\scripts\GameController.cs" />
-     <Compile Include="Assets\scripts\LoginController.cs" />
+     <Compile Include="Assets\scripts\Draggable.cs" />
+     <Compile Include="Assets\scripts\DropZone.cs" />
      <Compile Include="Assets\scripts\panel\choosePlayerButton.cs" />
      <Compile Include="Assets\scripts\panel\panelController.cs" />
-     <Compile Include="Assets\scripts\PlayerController.cs" />
+     <Compile Include="Assets\scripts\PanelBehaviourScript.cs" />
      <Compile Include="Assets\scripts\PlayerStats.cs" />
      <Compile Include="Assets\scripts\SelectPlayerBehaviour.cs" />
-     <Compile Include="Assets\scripts\TableController.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>D:/Projetos/mage/UnityClient/MageClientUnity/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
@@ -280,10 +285,10 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="Proyecto26.RestClient">
- <HintPath>D:/Projetos/mage/UnityClient/MageClientUnity/Assets/RestClient/Packages/Proyecto26.RestClient.dll</HintPath>
+ <HintPath>D:/Projetos/mage/UnityClient/MageClientUnity/Assets/plugins/RestClient/Packages/Proyecto26.RestClient.dll</HintPath>
  </Reference>
  <Reference Include="RSG.Promise_net35">
- <HintPath>D:/Projetos/mage/UnityClient/MageClientUnity/Assets/RestClient/Packages/RSG.Promise_net35.dll</HintPath>
+ <HintPath>D:/Projetos/mage/UnityClient/MageClientUnity/Assets/plugins/RestClient/Packages/RSG.Promise_net35.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Analytics">
  <HintPath>C:/Users/Zeh/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
@@ -318,6 +323,10 @@
  <Reference Include="Boo.Lang">
  <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/Boo.Lang.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{5DC7CF65-B218-1A81-7897-CCDE33435FF3}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

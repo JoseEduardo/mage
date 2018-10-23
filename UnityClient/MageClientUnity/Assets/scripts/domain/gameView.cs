@@ -35,6 +35,7 @@ namespace Models
 		}
 	}
 
+
 	[Serializable]
 	public class UserSkipPrioritySteps
 	{

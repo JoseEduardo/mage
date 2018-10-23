@@ -16,8 +16,18 @@ namespace Models
 	    public List<string> targets;
 	    public int min;
 	    public int max;
-	    public Dictionary<string, string> options;
+	    public GameOptions options;
 	    public string choice;
+
+		public override string ToString(){
+			return UnityEngine.JsonUtility.ToJson (this, true);
+		}
+	}
+
+	[Serializable]
+	public class GameOptions
+	{
+	    public string queryType;
 
 		public override string ToString(){
 			return UnityEngine.JsonUtility.ToJson (this, true);

@@ -15,3 +15,6 @@ Files used:
  - known-sets.txt - list of sets used in mage (Set name and Package name)
  - mtg-cards-data.txt - MTG cards data (generated from the Gatherer database)
  - mtg-sets-data.txt - list of sets in MTG and the 3 letters code for each of them
+
+
+ http://wiki.unity3d.com/index.php/SimpleJSON

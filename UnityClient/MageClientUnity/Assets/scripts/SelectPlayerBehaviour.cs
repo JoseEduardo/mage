@@ -5,7 +5,12 @@ using UnityEngine;
 public class SelectPlayerBehaviour : MonoBehaviour {
 	public string referenceId;
 
+	public void changeReferenceId(string newReference){
+		referenceId = newReference;
+	}
+
 	void OnMouseDown(){
-		PlayerController.doSendUuid(referenceId);
+		PlayerConectionController.doSendUuid(referenceId);
+		PlayerStats.needAskPlayer = false;
  	}
 }

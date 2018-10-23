@@ -6,10 +6,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using SimpleJSON;
 
 public class CallbackController : MonoBehaviour {
 	private RequestHelper currentRequest;
     public string basePath = "http://127.0.0.1:9000/";
+
+    public PlayerController playerController;
 
 	private void getCallback(){
 		currentRequest = new RequestHelper {
@@ -54,26 +57,57 @@ public class CallbackController : MonoBehaviour {
             }
             case "GAME_INIT": {
                 GameView message =  JsonUtility.FromJson<GameView>(callback.data);
+/*
            		Debug.Log(message);
           		Debug.Log(callback.data);
+*/
 				markReadCallback();
                 break;
             }
             case "GAME_INFORM": {
                 GameView message =  JsonUtility.FromJson<GameView>(callback.data);
+                Debug.Log(callback.data);
+/*
            		Debug.Log(message);
           		Debug.Log(callback.data);
-				markReadCallback();
+*/
                 break;
             }
             case "GAME_TARGET": {
+                markReadCallback();
                 GameClientMessage message =  JsonUtility.FromJson<GameClientMessage>(callback.data);
-           		Debug.Log(message);
-          		Debug.Log(callback.data);
-				markReadCallback();
+
+                if(message.options.queryType == "PICK_TARGET"){
+                    PlayerStats.needSelectPlayer = true;
+                    SelectPlayerBehaviour player1Slc = GameObject.Find("player1Select").GetComponent<SelectPlayerBehaviour>();
+                    SelectPlayerBehaviour player2Slc = GameObject.Find("player2Select").GetComponent<SelectPlayerBehaviour>();
+                    player1Slc.changeReferenceId(message.targets[0]);
+                    player2Slc.changeReferenceId(message.targets[1]);
+                    PlayerStats.message = message.message;
+                }
                 break;
             }
-            
+            case "GAME_ASK": {
+                markReadCallback();
+                Debug.Log(callback.data);
+                var message = JSON.Parse(callback.data);
+                playerController.populateHand(message["gameView"]["hand"]);
+
+                if(message["options"]["queryType"] == "ASK"){
+                    PlayerStats.needAskPlayer = true;
+
+                    PlayerStats.message = message["message"];
+                    PlayerStats.rightBtn = message["options"]["UI.right.btn.text"];
+                    PlayerStats.leftBtn = message["options"]["UI.left.btn.text"];
+                }
+
+                /*
+                GameClientMessage message =  JsonUtility.FromJson<GameClientMessage>(callback.data);
+                Debug.Log(callback.data);
+                Debug.Log(message.gameView);
+                */
+                break;
+            }
         }
 	}
 }
